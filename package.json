@@ -26,6 +26,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
-    "preact": "^10.3.3"
+    "preact": "^10.3.3",
+    "tailwindcss": "^1.2.0"
   }
 }
