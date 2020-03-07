@@ -1,6 +1,7 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
 import HtmlWebpackPlugin = require('html-webpack-plugin');
+import MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config: webpack.ConfigurationFactory = (env, args) => ({
   mode: args.env === 'development' ? 'development' : 'production',
@@ -12,6 +13,18 @@ const config: webpack.ConfigurationFactory = (env, args) => ({
       {
         test: /\.tsx?$/,
         loaders: ['babel-loader'],
+      },
+
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {},
+          },
+          'css-loader',
+          'postcss-loader',
+        ],
       },
     ],
   },
@@ -27,6 +40,8 @@ const config: webpack.ConfigurationFactory = (env, args) => ({
   },
 
   plugins: [
+    new MiniCssExtractPlugin(),
+
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
