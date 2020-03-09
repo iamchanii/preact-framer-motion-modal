@@ -38,6 +38,10 @@ const config: webpack.ConfigurationFactory = (env, args) => ({
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     modules: ['node_modules'],
+    alias: {
+      react: 'preact/compat',
+      'react-dom': 'preact/compat',
+    },
   },
 
   output: {
