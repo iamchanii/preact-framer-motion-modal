@@ -14,6 +14,7 @@
     "@types/webpack": "^4.41.7",
     "@types/webpack-dev-server": "^3.10.0",
     "babel-loader": "^8.0.6",
+    "cache-loader": "^4.1.0",
     "css-loader": "^3.4.2",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.9.0",
@@ -28,8 +29,9 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@reach/dialog": "^0.8.6",
+    "framer-motion": "^1.9.1",
     "preact": "^10.3.3",
-    "reakit": "^1.0.0-beta.16",
     "tailwindcss": "^1.2.0"
   }
 }

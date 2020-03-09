@@ -1,12 +1,19 @@
 import { h, FunctionComponent } from 'preact';
+import { useState } from 'preact/hooks';
 import './style.css';
 import { container } from './App.css';
-import { Button } from 'reakit';
+import Dialog from './dialog/Dialog';
 
 const App: FunctionComponent = () => {
+  const [visible, setVisible] = useState(false);
+
   return (
     <div class={container}>
-      <Button>Open Modal</Button>
+      <button onClick={() => setVisible(true)}>Open Modal</button>
+      <Dialog title="Dialog Title" visible={visible} onDismiss={() => setVisible(false)}>
+        Hello!
+        <button onClick={() => setVisible(false)}>Close Modal</button>
+      </Dialog>
     </div>
   );
 };

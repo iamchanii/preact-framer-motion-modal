@@ -1,0 +1,25 @@
+:global [data-reach-dialog-overlay] {
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.dialogContainer {
+  @apply fixed inset-0;
+  @apply flex justify-center items-center;
+}
+
+.dialogBackdrop {
+  @apply absolute inset-0;
+  background-color: rgba(0, 0, 0, 0.25);
+  opacity: var(--dialog-opacity);
+}
+
+:global [data-reach-dialog-content] {
+  @apply bg-white z-10 rounded-lg p-8 shadow-2xl;
+  opacity: var(--dialog-opacity);
+  transform: translateY(var(--dialog-y));
+}
+
+.dialogTitle {
+  @apply text-lg font-bold text-gray-900 mb-4;
+}
