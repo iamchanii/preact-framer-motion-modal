@@ -1,7 +1,8 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
-import HtmlWebpackPlugin = require('html-webpack-plugin');
-import MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { TypedCssModulesPlugin } from 'typed-css-modules-webpack-plugin';
 
 const config: webpack.ConfigurationFactory = (env, args) => ({
   mode: args.env === 'development' ? 'development' : 'production',
@@ -22,7 +23,12 @@ const config: webpack.ConfigurationFactory = (env, args) => ({
             loader: MiniCssExtractPlugin.loader,
             options: {},
           },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
           'postcss-loader',
         ],
       },
@@ -44,6 +50,10 @@ const config: webpack.ConfigurationFactory = (env, args) => ({
 
     new HtmlWebpackPlugin({
       template: './src/index.html',
+    }),
+
+    new TypedCssModulesPlugin({
+      globPattern: './src/**/*.css',
     }),
   ],
 });
