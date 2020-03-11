@@ -1,0 +1,20 @@
+.dialogHeader {
+  @apply text-lg font-bold text-gray-900;
+  @apply flex justify-between items-center mb-4 -mt-2;
+}
+
+.closeButton {
+  @apply ml-4 p-2 rounded -mr-2;
+
+  &:hover {
+    @apply bg-gray-200;
+  }
+
+  > svg {
+    @apply w-4 h-4;
+  }
+
+  > span {
+    @apply sr-only;
+  }
+}

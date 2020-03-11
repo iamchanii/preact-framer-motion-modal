@@ -1,7 +1,9 @@
 import { h, FunctionComponent } from 'preact';
-import { dialogBackdrop, dialogContainer, dialogTitle } from './Dialog.css';
+import { dialogBackdrop, dialogContainer } from './Dialog.css';
 import { AnimatePresence, motion, Variants, Transition } from 'framer-motion';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
+import DialogContext, { DialogContextValue } from './DialogContext';
+import { useMemo } from 'preact/hooks';
 
 const dialogVariants: Variants = {
   exit: {
@@ -29,36 +31,37 @@ const dialogTransition: Transition = {
 interface DialogProps {
   visible: boolean;
   onDismiss: () => void;
-  title: string;
 }
 
 const Dialog: FunctionComponent<DialogProps> = ({
   visible,
   onDismiss,
-  title,
   children,
 }) => {
+  const contextValue = useMemo<DialogContextValue>(() => ({ onDismiss }), [
+    onDismiss,
+  ]);
+
   return (
-    <AnimatePresence>
-      {visible && (
-        <DialogOverlay onDismiss={onDismiss}>
-          <motion.div
-            class={dialogContainer}
-            variants={dialogVariants}
-            exit="exit"
-            initial="initial"
-            animate="visible"
-            transition={dialogTransition}
-          >
-            <div class={dialogBackdrop} />
-            <DialogContent>
-              <p class={dialogTitle}>{title}</p>
-              {children}
-            </DialogContent>
-          </motion.div>
-        </DialogOverlay>
-      )}
-    </AnimatePresence>
+    <DialogContext.Provider value={contextValue}>
+      <AnimatePresence>
+        {visible && (
+          <DialogOverlay onDismiss={onDismiss}>
+            <motion.div
+              class={dialogContainer}
+              variants={dialogVariants}
+              exit="exit"
+              initial="initial"
+              animate="visible"
+              transition={dialogTransition}
+            >
+              <div class={dialogBackdrop} />
+              <DialogContent>{children}</DialogContent>
+            </motion.div>
+          </DialogOverlay>
+        )}
+      </AnimatePresence>
+    </DialogContext.Provider>
   );
 };
 
